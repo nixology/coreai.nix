@@ -1,0 +1,213 @@
+{
+  "nodes": {
+    "channel": {
+      "inputs": {
+        "nixpkgs": "nixpkgs"
+      },
+      "locked": {
+        "dir": "nixpkgs-unstable",
+        "lastModified": 1780057569,
+        "narHash": "sha256-biZ0tFQGwLbv9DQmJ6BFkNjZq+rrlsHAunnbCSxPi9c=",
+        "owner": "nixology",
+        "repo": "channels.nix",
+        "rev": "82145274e655c9dfd52ac50fee58a085a4f8cdce",
+        "type": "github"
+      },
+      "original": {
+        "dir": "nixpkgs-unstable",
+        "owner": "nixology",
+        "repo": "channels.nix",
+        "type": "github"
+      }
+    },
+    "core": {
+      "inputs": {
+        "channel": "channel",
+        "flake-parts": "flake-parts",
+        "nixpkgs": [
+          "flake",
+          "core",
+          "channel",
+          "nixpkgs"
+        ]
+      },
+      "locked": {
+        "lastModified": 1780890944,
+        "narHash": "sha256-OjuwuDqfr/tSSTRqGsfoAG8Y7oXgULWUf/odjk1QNws=",
+        "owner": "nixology",
+        "repo": "core.nix",
+        "rev": "8c4cd06b2a8cf5766ee1dcc745e90e42e1526fd5",
+        "type": "github"
+      },
+      "original": {
+        "owner": "nixology",
+        "repo": "core.nix",
+        "type": "github"
+      }
+    },
+    "coreai-models": {
+      "flake": false,
+      "locked": {
+        "lastModified": 1780947666,
+        "narHash": "sha256-CAk31pivLnWWNOYg7ym5CghCcpzxjCDJgwW+ApipcCY=",
+        "owner": "apple",
+        "repo": "coreai-models",
+        "rev": "b1cb71b8522d99408059fa0b98b8742171bcb0b8",
+        "type": "github"
+      },
+      "original": {
+        "owner": "apple",
+        "ref": "0.1.0",
+        "repo": "coreai-models",
+        "type": "github"
+      }
+    },
+    "coreai-opt": {
+      "flake": false,
+      "locked": {
+        "lastModified": 1780707807,
+        "narHash": "sha256-4djTmZTagEFAQGRDm+rO/UcqOcVceS0bF2vdOb+W3Yg=",
+        "owner": "apple",
+        "repo": "coreai-optimization",
+        "rev": "e27b3d050196c418adf85f19a9827d2dd1801e73",
+        "type": "github"
+      },
+      "original": {
+        "owner": "apple",
+        "ref": "v0.2.0",
+        "repo": "coreai-optimization",
+        "type": "github"
+      }
+    },
+    "coreai-torch": {
+      "flake": false,
+      "locked": {
+        "lastModified": 1780712416,
+        "narHash": "sha256-VxR6WE73B4azfndCWUZn4g049MklKXUu+awO/IT8brw=",
+        "owner": "apple",
+        "repo": "coreai-torch",
+        "rev": "7171b3bb59f2474a5313d82ff4bfe187a1155f94",
+        "type": "github"
+      },
+      "original": {
+        "owner": "apple",
+        "ref": "v0.4.0",
+        "repo": "coreai-torch",
+        "type": "github"
+      }
+    },
+    "coremltools": {
+      "flake": false,
+      "locked": {
+        "lastModified": 1762303587,
+        "narHash": "sha256-A2hwsJtLM2lSTVVZW+qI5ppMNMF9SKlWZs/1wC9YAxs=",
+        "owner": "apple",
+        "repo": "coremltools",
+        "rev": "428d4b2658dfc44194f27f4f36870751be402ff7",
+        "type": "github"
+      },
+      "original": {
+        "owner": "apple",
+        "ref": "9.0",
+        "repo": "coremltools",
+        "type": "github"
+      }
+    },
+    "flake": {
+      "inputs": {
+        "core": "core"
+      },
+      "locked": {
+        "lastModified": 1780937864,
+        "narHash": "sha256-pew3Kfht3aHPgH9vHolz0TuZJY95nYcHdLF/7+sTWH4=",
+        "owner": "nixology",
+        "repo": "flake.nix",
+        "rev": "e29571261a768b767f6619efef68a4ec90a10199",
+        "type": "github"
+      },
+      "original": {
+        "owner": "nixology",
+        "repo": "flake.nix",
+        "type": "github"
+      }
+    },
+    "flake-parts": {
+      "inputs": {
+        "nixpkgs-lib": "nixpkgs-lib"
+      },
+      "locked": {
+        "lastModified": 1778716662,
+        "narHash": "sha256-m1Yf0wZ8j1OHjTc2UwHwyQRSnNeSgLJOd7q5Y45hzi4=",
+        "owner": "hercules-ci",
+        "repo": "flake-parts",
+        "rev": "f7c1a2d347e4c52d5fb8d10cb4d94b5884e546fb",
+        "type": "github"
+      },
+      "original": {
+        "owner": "hercules-ci",
+        "repo": "flake-parts",
+        "type": "github"
+      }
+    },
+    "nixpkgs": {
+      "locked": {
+        "lastModified": 1779877693,
+        "narHash": "sha256-NOF9NAREhxr50bbBfVcVOq+ArCMSoe8dP79Pk2uyARk=",
+        "owner": "nixos",
+        "repo": "nixpkgs",
+        "rev": "4100e830e085863741bc69b156ec4ccd53ab5be0",
+        "type": "github"
+      },
+      "original": {
+        "owner": "nixos",
+        "ref": "nixpkgs-unstable",
+        "repo": "nixpkgs",
+        "type": "github"
+      }
+    },
+    "nixpkgs-lib": {
+      "locked": {
+        "lastModified": 1777168982,
+        "narHash": "sha256-GOkGPcboWE9BmGCRMLX3worL4EMnsnG8MyKmXNeYuhQ=",
+        "owner": "nix-community",
+        "repo": "nixpkgs.lib",
+        "rev": "f5901329dade4a6ea039af1433fb087bd9c1fe14",
+        "type": "github"
+      },
+      "original": {
+        "owner": "nix-community",
+        "repo": "nixpkgs.lib",
+        "type": "github"
+      }
+    },
+    "root": {
+      "inputs": {
+        "coreai-models": "coreai-models",
+        "coreai-opt": "coreai-opt",
+        "coreai-torch": "coreai-torch",
+        "coremltools": "coremltools",
+        "flake": "flake",
+        "yuvio": "yuvio"
+      }
+    },
+    "yuvio": {
+      "flake": false,
+      "locked": {
+        "lastModified": 1750850871,
+        "narHash": "sha256-FLVMDxa6lfQFA+cQpTseY9TnLPcEhHv7svMRQ1J9dC0=",
+        "owner": "labradon",
+        "repo": "yuvio",
+        "rev": "570d35c33a7ee1e16a63d51bd166ce14d27de858",
+        "type": "github"
+      },
+      "original": {
+        "owner": "labradon",
+        "ref": "v1.6",
+        "repo": "yuvio",
+        "type": "github"
+      }
+    }
+  },
+  "root": "root",
+  "version": 7
+}
