@@ -10,6 +10,9 @@
   inputs.coreai-models.url = "github:apple/coreai-models/0.1.0";
   inputs.coreai-models.flake = false;
 
+  inputs.coreai-models-unstable.url = "github:apple/coreai-models";
+  inputs.coreai-models-unstable.flake = false;
+
   inputs.coreai-opt.url = "github:apple/coreai-optimization/v0.2.0";
   inputs.coreai-opt.flake = false;
 

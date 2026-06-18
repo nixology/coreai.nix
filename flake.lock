@@ -58,6 +58,22 @@
         "type": "github"
       }
     },
+    "coreai-models-unstable": {
+      "flake": false,
+      "locked": {
+        "lastModified": 1781815629,
+        "narHash": "sha256-q1fg6AkBny10dvK0Y6OWemcXDAcPwumjFQL6Rm2/Exg=",
+        "owner": "apple",
+        "repo": "coreai-models",
+        "rev": "e358c8435679c904687f8070eb95150e36e4b76d",
+        "type": "github"
+      },
+      "original": {
+        "owner": "apple",
+        "repo": "coreai-models",
+        "type": "github"
+      }
+    },
     "coreai-opt": {
       "flake": false,
       "locked": {
@@ -183,6 +199,7 @@
     "root": {
       "inputs": {
         "coreai-models": "coreai-models",
+        "coreai-models-unstable": "coreai-models-unstable",
         "coreai-opt": "coreai-opt",
         "coreai-torch": "coreai-torch",
         "coremltools": "coremltools",
