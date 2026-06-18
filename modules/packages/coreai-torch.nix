@@ -42,11 +42,16 @@
           typing-extensions
         ];
 
+        nativeBuildInputs = with python.pkgs; [
+          pythonRelaxDepsHook
+        ];
+
         pythonImportsCheck = [
           "coreai_torch"
         ];
 
-        dontBuild = true;
+        pythonRelaxDeps = true;
+
         dontStrip = true;
         doCheck = false;
       };

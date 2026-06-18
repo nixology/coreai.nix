@@ -40,7 +40,6 @@
           safetensors
         ];
 
-        dontBuild = true;
         dontCheckRuntimeDeps = true;
         dontStrip = true;
         doCheck = false;

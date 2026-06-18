@@ -35,7 +35,6 @@
           tqdm
         ];
 
-        dontBuild = true;
         dontStrip = true;
         doCheck = false;
       };

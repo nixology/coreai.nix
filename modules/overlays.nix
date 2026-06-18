@@ -2,24 +2,23 @@
   perSystem =
     { final, pkgs, ... }:
     {
-      overlayAttrs = {
-        python = final.python312;
-
-        python312 = pkgs.python312.override {
+      overlayAttrs =
+        let
           packageOverrides = _pythonFinal: pythonPrev: {
-            h5py = pythonPrev.h5py.overrideAttrs (_oldAttrs: {
-              doCheck = false;
+            h5py = pythonPrev.h5py.overrideAttrs (_: {
               doInstallCheck = false;
             });
-            pyarrow = pythonPrev.pyarrow.overrideAttrs (_oldAttrs: {
-              doCheck = false;
+            pyarrow = pythonPrev.pyarrow.overrideAttrs (_: {
               doInstallCheck = false;
             });
           };
-        };
+        in
+        {
+          pythonPackagesExtensions = pkgs.pythonPackagesExtensions ++ [
+            packageOverrides
+          ];
 
-        # Update python3Packages to use the newly overridden python3
-        python312Packages = final.python312.pkgs;
-      };
+          python = final.python312;
+        };
     };
 }

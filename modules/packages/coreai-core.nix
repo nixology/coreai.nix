@@ -31,7 +31,6 @@
           psutil
         ];
 
-        dontBuild = true;
         dontStrip = true;
         doCheck = false;
       };
@@ -63,7 +62,6 @@
             yuvio
           ];
 
-          dontBuild = true;
           dontStrip = true;
           doCheck = false;
         };
