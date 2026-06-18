@@ -1,12 +1,18 @@
 { inputs, ... }: {
   perSystem =
-    { config, final, ... }:
+    {
+      config,
+      final,
+      pkgs,
+      ...
+    }:
     let
       _coreai-models_ = inputs.flake.lib.metadataForFlakeInput inputs.self inputs.coreai-models;
       _coreai-models-unstable_ = inputs.flake.lib.metadataForFlakeInput inputs.self inputs.coreai-models-unstable;
-    in
-    {
-      packages.coreai-models = final.python.pkgs.buildPythonPackage (finalAttrs: {
+
+      python = final.python;
+
+      coreai-models = python.pkgs.buildPythonPackage (finalAttrs: {
         inherit (_coreai-models_) pname version;
 
         src = final.fetchFromGitHub {
@@ -18,7 +24,7 @@
 
         sourceRoot = "${finalAttrs.src.name}/python";
 
-        dependencies = with final.python.pkgs; [
+        dependencies = with python.pkgs; [
           accelerate
           config.packages.coreai-core
           config.packages.coreai-opt
@@ -35,7 +41,7 @@
           transformers
         ];
 
-        nativeBuildInputs = with final.python.pkgs; [
+        nativeBuildInputs = with python.pkgs; [
           hatchling
           pip
           pythonRelaxDepsHook
@@ -50,5 +56,27 @@
 
         pythonRelaxDeps = true;
       });
+    in
+    {
+      apps = {
+        coreai-diffusion-export = {
+          type = "app";
+          program = "${coreai-models}/bin/coreai.diffusion.export";
+        };
+        coreai-llm-eval = {
+          type = "app";
+          program = "${coreai-models}/bin/coreai.llm.eval";
+        };
+        coreai-llm-export = {
+          type = "app";
+          program = "${coreai-models}/bin/coreai.llm.export";
+        };
+        coreai-model-registry = {
+          type = "app";
+          program = "${coreai-models}/bin/coreai.model.registry";
+        };
+      };
+
+      packages = { inherit coreai-models; };
     };
 }
