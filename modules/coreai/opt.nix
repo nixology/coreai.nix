@@ -4,32 +4,29 @@
     {
       config,
       final,
-      lib,
       ...
     }:
+    with final.coreai.python.pkgs;
     let
       _coreai-opt_ = inputs.flake.lib.metadataForFlakeInput inputs.self inputs.coreai-opt;
 
-      python = final.python;
-      pythonVersionMajor = lib.versions.major python.version;
-
       format = "wheel";
 
-      coreai-opt = python.pkgs.buildPythonPackage {
+      coreai-opt = buildPythonPackage (finalAttrs: {
         inherit (_coreai-opt_) pname version;
         inherit format;
 
-        src = python.pkgs.fetchPypi {
-          pname = builtins.replaceStrings [ "-" ] [ "_" ] _coreai-opt_.pname;
-          inherit (_coreai-opt_) version;
+        src = fetchPypi {
+          pname = builtins.replaceStrings [ "-" ] [ "_" ] finalAttrs.pname;
+          inherit (finalAttrs) version;
           inherit format;
           hash = "sha256-ZG3IEKOfF0LN0YcFLlnNUm+pCT+pmP0OTnxg6iugpiI=";
           platform = "any";
-          python = "py${pythonVersionMajor}";
-          dist = "py${pythonVersionMajor}";
+          python = "py${final.coreai.python.versionMajor}";
+          dist = "py${final.coreai.python.versionMajor}";
         };
 
-        propagatedBuildInputs = with python.pkgs; [
+        propagatedBuildInputs = [
           config.packages.coremltools
           numpy
           pydantic
@@ -43,7 +40,7 @@
         dontCheckRuntimeDeps = true;
         dontStrip = true;
         doCheck = false;
-      };
+      });
     in
     {
       packages = {

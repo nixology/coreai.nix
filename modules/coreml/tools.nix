@@ -1,31 +1,28 @@
 { inputs, ... }:
 {
   perSystem =
-    { final, lib, ... }:
+    { final, ... }:
+    with final.coreai.python.pkgs;
     let
       _coremltools_ = inputs.flake.lib.metadataForFlakeInput inputs.self inputs.coremltools;
 
-      python = final.python;
-      pythonVersionMajorMinorCompact =
-        lib.versions.major python.version + lib.versions.minor python.version;
-
       format = "wheel";
 
-      coremltools = python.pkgs.buildPythonPackage {
+      coremltools = buildPythonPackage (finalAttrs: {
         inherit (_coremltools_) pname version;
         inherit format;
 
-        src = python.pkgs.fetchPypi {
-          pname = builtins.replaceStrings [ "-" ] [ "_" ] _coremltools_.pname;
-          inherit (_coremltools_) version;
+        src = fetchPypi {
+          pname = builtins.replaceStrings [ "-" ] [ "_" ] finalAttrs.pname;
+          inherit (finalAttrs) version;
           inherit format;
           hash = "sha256-cHnotv9aY/DiwI7uuGc+TquMojHUsurk9/sAXg0IqM0=";
           platform = "macosx_11_0_arm64";
-          python = "cp${pythonVersionMajorMinorCompact}";
-          dist = "cp${pythonVersionMajorMinorCompact}";
+          python = "cp${final.coreai.python.versionMajorMinorCompact}";
+          dist = "cp${final.coreai.python.versionMajorMinorCompact}";
         };
 
-        propagatedBuildInputs = with python.pkgs; [
+        propagatedBuildInputs = [
           attrs
           cattrs
           numpy
@@ -37,7 +34,7 @@
 
         dontStrip = true;
         doCheck = false;
-      };
+      });
     in
     {
       packages = {

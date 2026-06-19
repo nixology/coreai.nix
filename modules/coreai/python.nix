@@ -1,6 +1,11 @@
 {
   perSystem =
-    { final, pkgs, ... }:
+    {
+      final,
+      lib,
+      pkgs,
+      ...
+    }:
     {
       overlayAttrs =
         let
@@ -18,7 +23,18 @@
             packageOverrides
           ];
 
-          python = final.python312;
+          coreai =
+            let
+              python = final.python312;
+            in
+            {
+              python = {
+                self = python;
+                inherit (python) pkgs version;
+                versionMajor = lib.versions.major python.version;
+                versionMajorMinorCompact = lib.versions.major python.version + lib.versions.minor python.version;
+              };
+            };
         };
     };
 }

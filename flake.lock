@@ -18,21 +18,21 @@
     },
     "core": {
       "inputs": {
+        "default": "default",
         "flake-parts": "flake-parts",
         "nixpkgs": [
           "flake",
           "core",
-          "nixpkgs-unstable",
+          "default",
           "channel"
-        ],
-        "nixpkgs-unstable": "nixpkgs-unstable"
+        ]
       },
       "locked": {
-        "lastModified": 1781799569,
-        "narHash": "sha256-yHYqZ0OKwRHwYxfUyuEAyt6svj/5GS0UDBMOOJUpsE0=",
+        "lastModified": 1781801793,
+        "narHash": "sha256-pWsmFKUMYDYvtyzURtEmOASatrqf+PGBv/sjHAOXGfo=",
         "owner": "nixology",
         "repo": "core.nix",
-        "rev": "99e17cc68b9c8df2b3247bb93d1307348bad2c25",
+        "rev": "1ce30aff2b7aae528a20fdf91649522bb357acdc",
         "type": "github"
       },
       "original": {
@@ -125,16 +125,36 @@
         "type": "github"
       }
     },
+    "default": {
+      "inputs": {
+        "channel": "channel"
+      },
+      "locked": {
+        "dir": "nixpkgs-unstable",
+        "lastModified": 1781798631,
+        "narHash": "sha256-TFnCx40VNHLwA+gS3Tb6HW7do3aZijyVp/H2FV4rSz4=",
+        "owner": "nixology",
+        "repo": "channels.nix",
+        "rev": "01b2cfe422ec424fdfa4312a1655f2bd4ac7b326",
+        "type": "github"
+      },
+      "original": {
+        "dir": "nixpkgs-unstable",
+        "owner": "nixology",
+        "repo": "channels.nix",
+        "type": "github"
+      }
+    },
     "flake": {
       "inputs": {
         "core": "core"
       },
       "locked": {
-        "lastModified": 1781799806,
-        "narHash": "sha256-3Sl30nNmEMebS68uyZ8OQlQxX353w1hHPvO3auqNp3w=",
+        "lastModified": 1781888138,
+        "narHash": "sha256-S2f4iMmU5MCzW0fCgQRfAI3cgPFVdAP0jkzBIP+UhmU=",
         "owner": "nixology",
         "repo": "flake.nix",
-        "rev": "9285599d96b04ce19517745069c00a3478fc66bb",
+        "rev": "8f716bfcf68eadc085b2eac33b6e0c1ea395bb48",
         "type": "github"
       },
       "original": {
@@ -173,26 +193,6 @@
       "original": {
         "owner": "nix-community",
         "repo": "nixpkgs.lib",
-        "type": "github"
-      }
-    },
-    "nixpkgs-unstable": {
-      "inputs": {
-        "channel": "channel"
-      },
-      "locked": {
-        "dir": "nixpkgs-unstable",
-        "lastModified": 1781798631,
-        "narHash": "sha256-TFnCx40VNHLwA+gS3Tb6HW7do3aZijyVp/H2FV4rSz4=",
-        "owner": "nixology",
-        "repo": "channels.nix",
-        "rev": "01b2cfe422ec424fdfa4312a1655f2bd4ac7b326",
-        "type": "github"
-      },
-      "original": {
-        "dir": "nixpkgs-unstable",
-        "owner": "nixology",
-        "repo": "channels.nix",
         "type": "github"
       }
     },

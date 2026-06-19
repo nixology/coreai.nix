@@ -3,28 +3,26 @@
     {
       config,
       final,
-      pkgs,
       ...
     }:
+    with final.coreai.python.pkgs;
     let
       _coreai-models_ = inputs.flake.lib.metadataForFlakeInput inputs.self inputs.coreai-models;
       _coreai-models-unstable_ = inputs.flake.lib.metadataForFlakeInput inputs.self inputs.coreai-models-unstable;
 
-      python = final.python;
-
-      coreai-models = python.pkgs.buildPythonPackage (finalAttrs: {
+      coreai-models = buildPythonPackage (finalAttrs: {
         inherit (_coreai-models_) pname version;
 
         src = final.fetchFromGitHub {
           owner = "apple";
-          repo = "coreai-models";
+          repo = finalAttrs.pname;
           inherit (_coreai-models-unstable_) rev;
           sha256 = "sha256-q1fg6AkBny10dvK0Y6OWemcXDAcPwumjFQL6Rm2/Exg=";
         };
 
         sourceRoot = "${finalAttrs.src.name}/python";
 
-        dependencies = with python.pkgs; [
+        dependencies = [
           accelerate
           config.packages.coreai-core
           config.packages.coreai-opt
@@ -41,7 +39,7 @@
           transformers
         ];
 
-        nativeBuildInputs = with python.pkgs; [
+        nativeBuildInputs = [
           hatchling
           pip
           pythonRelaxDepsHook

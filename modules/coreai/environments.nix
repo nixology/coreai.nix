@@ -6,9 +6,8 @@
       lib,
       ...
     }:
+    with final.coreai.python.pkgs;
     let
-      python = final.python;
-
       default = {
         mkShellOverrides = {
           stdenv = final.stdenvNoCC;
@@ -22,7 +21,7 @@
               echo "Skipping venv creation, ${venvDir} already exists."
             else
               echo "Creating new venv environment in path: '${venvDir}'"
-              ${python.pkgs.python.interpreter} -m venv "${venvDir}"
+              ${python.interpreter} -m venv "${venvDir}"
             fi
 
             source "${venvDir}/bin/activate"
@@ -30,7 +29,7 @@
         packages = [
           config.packages.coreai-opt
           config.packages.coreai-torch
-          (python.withPackages (
+          (final.coreai.python.self.withPackages (
             ps: with ps; [
               huggingface-hub
               jupyterlab
