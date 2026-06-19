@@ -22,7 +22,7 @@
           dist = "cp${final.coreai.python.versionMajorMinorCompact}";
         };
 
-        propagatedBuildInputs = [
+        dependencies = [
           attrs
           cattrs
           numpy
@@ -32,8 +32,9 @@
           tqdm
         ];
 
-        dontStrip = true;
-        doCheck = false;
+        pythonImportsCheck = [
+          "coremltools"
+        ];
       });
     in
     {

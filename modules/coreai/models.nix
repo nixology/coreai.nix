@@ -1,4 +1,5 @@
-{ inputs, ... }: {
+{ inputs, ... }:
+{
   perSystem =
     {
       config,
@@ -51,6 +52,10 @@
         '';
 
         pyproject = true;
+
+        pythonImportsCheck = [
+          "coreai_models"
+        ];
 
         pythonRelaxDeps = true;
       });

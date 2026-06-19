@@ -48,9 +48,6 @@
         ];
 
         pythonRelaxDeps = true;
-
-        dontStrip = true;
-        doCheck = false;
       });
     in
     {

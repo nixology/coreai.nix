@@ -22,13 +22,10 @@
           dist = "py${final.coreai.python.versionMajor}";
         };
 
-        propagatedBuildInputs = [
+        dependencies = [
           numpy
           psutil
         ];
-
-        dontStrip = true;
-        doCheck = false;
       });
 
       coreai-core =
@@ -39,6 +36,7 @@
         buildPythonPackage (finalAttrs: {
           inherit pname version;
           inherit format;
+
           src = fetchPypi {
             pname = builtins.replaceStrings [ "-" ] [ "_" ] finalAttrs.pname;
             inherit (finalAttrs) version;
@@ -50,7 +48,7 @@
             abi = "cp${final.coreai.python.versionMajorMinorCompact}";
           };
 
-          propagatedBuildInputs = [
+          dependencies = [
             ml-dtypes
             numpy
             pillow
@@ -58,8 +56,9 @@
             yuvio
           ];
 
-          dontStrip = true;
-          doCheck = false;
+          pythonImportsCheck = [
+            "coreai"
+          ];
         });
     in
     {

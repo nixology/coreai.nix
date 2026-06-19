@@ -26,7 +26,7 @@
           dist = "py${final.coreai.python.versionMajor}";
         };
 
-        propagatedBuildInputs = [
+        dependencies = [
           config.packages.coremltools
           numpy
           pydantic
@@ -37,9 +37,15 @@
           safetensors
         ];
 
-        dontCheckRuntimeDeps = true;
-        dontStrip = true;
-        doCheck = false;
+        nativeBuildInputs = [
+          pythonRelaxDepsHook
+        ];
+
+        pythonImportsCheck = [
+          "coreai_opt"
+        ];
+
+        pythonRelaxDeps = true;
       });
     in
     {
