@@ -13,14 +13,21 @@
   inputs.coreai-models-unstable.url = "github:apple/coreai-models";
   inputs.coreai-models-unstable.flake = false;
 
-  inputs.coreai-opt.url = "github:apple/coreai-optimization/v0.2.0";
-  inputs.coreai-opt.flake = false;
+  inputs.coreai-optimization.url = "github:apple/coreai-optimization/v0.2.0";
+  inputs.coreai-optimization.flake = false;
 
   inputs.coreai-torch.url = "github:apple/coreai-torch/v0.4.0";
   inputs.coreai-torch.flake = false;
 
   inputs.coremltools.url = "github:apple/coremltools/9.0";
   inputs.coremltools.flake = false;
+
+  inputs.mlx.url = "github:nixology/mlx.nix";
+  inputs.mlx.inputs.flake.follows = "flake";
+  inputs.mlx.inputs.models.follows = "models";
+
+  inputs.models.url = "github:nixology/models.nix";
+  inputs.models.inputs.flake.follows = "flake";
 
   inputs.yuvio.url = "github:labradon/yuvio/v1.6";
   inputs.yuvio.flake = false;

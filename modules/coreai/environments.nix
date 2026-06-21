@@ -27,7 +27,7 @@
             source "${venvDir}/bin/activate"
           '';
         packages = [
-          config.packages.coreai-opt
+          config.packages.coreai-optimization
           config.packages.coreai-torch
           (final.coreai.python.self.withPackages (
             ps: with ps; [

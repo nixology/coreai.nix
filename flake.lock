@@ -1,5 +1,53 @@
 {
   "nodes": {
+    "Qwen--Qwen2_5-0_5B": {
+      "flake": false,
+      "locked": {
+        "lastModified": 1727267556,
+        "narHash": "sha256-BjYP2cg7vXSX1ljF2/YEr1Kq/nokWqUrni8Nm+2t19g=",
+        "ref": "refs/heads/main",
+        "rev": "060db6499f32faf8b98477b0a26969ef7d8b9987",
+        "revCount": 12,
+        "type": "git",
+        "url": "https://huggingface.co/Qwen/Qwen2.5-0.5B"
+      },
+      "original": {
+        "type": "git",
+        "url": "https://huggingface.co/Qwen/Qwen2.5-0.5B"
+      }
+    },
+    "Qwen--Qwen2_5-1_5B-Instruct": {
+      "flake": false,
+      "locked": {
+        "lastModified": 1727267570,
+        "narHash": "sha256-61+m6ZCMph5mbUUGZuDfO+Tdq7VMFM5Q5qnh5dCxego=",
+        "ref": "refs/heads/main",
+        "rev": "989aa7980e4cf806f80c7fef2b1adb7bc71aa306",
+        "revCount": 8,
+        "type": "git",
+        "url": "https://huggingface.co/Qwen/Qwen2.5-1.5B-Instruct"
+      },
+      "original": {
+        "type": "git",
+        "url": "https://huggingface.co/Qwen/Qwen2.5-1.5B-Instruct"
+      }
+    },
+    "Qwen--Qwen3-0_6B": {
+      "flake": false,
+      "locked": {
+        "lastModified": 1753501587,
+        "narHash": "sha256-BWSQkHRRZJ+1/J5FgQ1j6FVpIp4BQmTEtfGr7GeDRtc=",
+        "ref": "refs/heads/main",
+        "rev": "c1899de289a04d12100db370d81485cdf75e47ca",
+        "revCount": 24,
+        "type": "git",
+        "url": "https://huggingface.co/Qwen/Qwen3-0.6B"
+      },
+      "original": {
+        "type": "git",
+        "url": "https://huggingface.co/Qwen/Qwen3-0.6B"
+      }
+    },
     "channel": {
       "locked": {
         "lastModified": 1781607440,
@@ -74,7 +122,7 @@
         "type": "github"
       }
     },
-    "coreai-opt": {
+    "coreai-optimization": {
       "flake": false,
       "locked": {
         "lastModified": 1780707807,
@@ -181,6 +229,136 @@
         "type": "github"
       }
     },
+    "google--gemma-3-1b-it": {
+      "flake": false,
+      "locked": {
+        "lastModified": 1743772360,
+        "narHash": "sha256-bbkUcq11f4U6bwV1N63IdrG5qLxHEoAV0FOjcCbItf4=",
+        "ref": "refs/heads/main",
+        "rev": "dcc83ea841ab6100d6b47a070329e1ba4cf78752",
+        "revCount": 7,
+        "type": "git",
+        "url": "https://huggingface.co/google/gemma-3-1b-it"
+      },
+      "original": {
+        "type": "git",
+        "url": "https://huggingface.co/google/gemma-3-1b-it"
+      }
+    },
+    "mlx": {
+      "inputs": {
+        "flake": [
+          "flake"
+        ],
+        "mlx": "mlx_2",
+        "mlx-lm": "mlx-lm",
+        "models": [
+          "models"
+        ]
+      },
+      "locked": {
+        "lastModified": 1781801480,
+        "narHash": "sha256-gAQD8jpL4aJHFJdVgTQ1UYbywK7UdI6vTkVH2SFNSwY=",
+        "owner": "nixology",
+        "repo": "mlx.nix",
+        "rev": "783e7b824f015b06e13f4728bee14a83600c00b6",
+        "type": "github"
+      },
+      "original": {
+        "owner": "nixology",
+        "repo": "mlx.nix",
+        "type": "github"
+      }
+    },
+    "mlx-lm": {
+      "flake": false,
+      "locked": {
+        "lastModified": 1776843249,
+        "narHash": "sha256-DPOJfsIucG8mWt4ZKenymCJo/i9Jw+a+iuIygIIYkA8=",
+        "owner": "ml-explore",
+        "repo": "mlx-lm",
+        "rev": "ed1fca4cef15a824c5f1702c80f70b4cffc8e4dd",
+        "type": "github"
+      },
+      "original": {
+        "owner": "ml-explore",
+        "ref": "v0.31.3",
+        "repo": "mlx-lm",
+        "type": "github"
+      }
+    },
+    "mlx_2": {
+      "flake": false,
+      "locked": {
+        "lastModified": 1776818120,
+        "narHash": "sha256-0Oxacz61WGWZrpWw+fMQjEQfwOx1l1L2d0kWl54/LrQ=",
+        "owner": "ml-explore",
+        "repo": "mlx",
+        "rev": "68cf2fddd8de5edd8ab3d926391772b2e2cedad8",
+        "type": "github"
+      },
+      "original": {
+        "owner": "ml-explore",
+        "ref": "v0.31.2",
+        "repo": "mlx",
+        "type": "github"
+      }
+    },
+    "models": {
+      "inputs": {
+        "Qwen--Qwen2_5-0_5B": "Qwen--Qwen2_5-0_5B",
+        "Qwen--Qwen2_5-1_5B-Instruct": "Qwen--Qwen2_5-1_5B-Instruct",
+        "Qwen--Qwen3-0_6B": "Qwen--Qwen3-0_6B",
+        "flake": [
+          "flake"
+        ],
+        "google--gemma-3-1b-it": "google--gemma-3-1b-it",
+        "nix-hug": "nix-hug",
+        "unsloth--Qwen3_6-27B-MLX-8bit": "unsloth--Qwen3_6-27B-MLX-8bit",
+        "unsloth--Qwen3_6-35B-A3B-MLX-8bit": "unsloth--Qwen3_6-35B-A3B-MLX-8bit",
+        "yujiepan--gemma-3-tiny-random": "yujiepan--gemma-3-tiny-random",
+        "yujiepan--mistral-v0_3-tiny-random": "yujiepan--mistral-v0_3-tiny-random",
+        "yujiepan--qwen2_5-tiny-random": "yujiepan--qwen2_5-tiny-random",
+        "yujiepan--qwen3-tiny-random": "yujiepan--qwen3-tiny-random"
+      },
+      "locked": {
+        "lastModified": 1782049568,
+        "narHash": "sha256-EWK/n2bsduxqX3Mkw5LXj1mbovRIPsxWBUKFD9mu5Hs=",
+        "owner": "nixology",
+        "repo": "models.nix",
+        "rev": "d95a26a0fce17d12fdb58dd7dafee18ba0b162c1",
+        "type": "github"
+      },
+      "original": {
+        "owner": "nixology",
+        "repo": "models.nix",
+        "type": "github"
+      }
+    },
+    "nix-hug": {
+      "inputs": {
+        "nixpkgs": [
+          "models",
+          "flake",
+          "core",
+          "nixpkgs"
+        ]
+      },
+      "locked": {
+        "lastModified": 1781967748,
+        "narHash": "sha256-RJams51fGsTUHKRuQYcfzVbLeGD7aBcKj3RFGD51XYQ=",
+        "owner": "marksisson",
+        "repo": "nix-hug",
+        "rev": "61249e3f631b134c790e1a07f319cc32a79c5532",
+        "type": "github"
+      },
+      "original": {
+        "owner": "marksisson",
+        "ref": "marksisson/add-fetchurl-curl-opts",
+        "repo": "nix-hug",
+        "type": "github"
+      }
+    },
     "nixpkgs-lib": {
       "locked": {
         "lastModified": 1777168982,
@@ -200,11 +378,109 @@
       "inputs": {
         "coreai-models": "coreai-models",
         "coreai-models-unstable": "coreai-models-unstable",
-        "coreai-opt": "coreai-opt",
+        "coreai-optimization": "coreai-optimization",
         "coreai-torch": "coreai-torch",
         "coremltools": "coremltools",
         "flake": "flake",
+        "mlx": "mlx",
+        "models": "models",
         "yuvio": "yuvio"
+      }
+    },
+    "unsloth--Qwen3_6-27B-MLX-8bit": {
+      "flake": false,
+      "locked": {
+        "lastModified": 1776867520,
+        "narHash": "sha256-OSeRG95pSri8kdRKzM4fmTj7wo5Z37h9OiwMeJl4Dy4=",
+        "ref": "refs/heads/main",
+        "rev": "78067073d2bf9795e5aabcfcd647bd36cf43c0b5",
+        "revCount": 2,
+        "type": "git",
+        "url": "https://huggingface.co/unsloth/Qwen3.6-27B-MLX-8bit"
+      },
+      "original": {
+        "type": "git",
+        "url": "https://huggingface.co/unsloth/Qwen3.6-27B-MLX-8bit"
+      }
+    },
+    "unsloth--Qwen3_6-35B-A3B-MLX-8bit": {
+      "flake": false,
+      "locked": {
+        "lastModified": 1776414385,
+        "narHash": "sha256-zzY7Lf1MYshSsj8RXyCL7J226GMJ2K4oMp6SXkEPYLY=",
+        "ref": "refs/heads/main",
+        "rev": "d928611c119d7d86037d6926ac50712062ff0f29",
+        "revCount": 3,
+        "type": "git",
+        "url": "https://huggingface.co/unsloth/Qwen3.6-35B-A3b-MLX-8bit"
+      },
+      "original": {
+        "type": "git",
+        "url": "https://huggingface.co/unsloth/Qwen3.6-35B-A3b-MLX-8bit"
+      }
+    },
+    "yujiepan--gemma-3-tiny-random": {
+      "flake": false,
+      "locked": {
+        "lastModified": 1742061357,
+        "narHash": "sha256-HjMy9d4fYcvpsZkUmXOyLklw5FPMUNdWGnlrAnc9Zvo=",
+        "ref": "refs/heads/main",
+        "rev": "f746b7ca8ef1ae9ba057354188bfcce0c788d674",
+        "revCount": 3,
+        "type": "git",
+        "url": "https://huggingface.co/yujiepan/gemma-3-tiny-random"
+      },
+      "original": {
+        "type": "git",
+        "url": "https://huggingface.co/yujiepan/gemma-3-tiny-random"
+      }
+    },
+    "yujiepan--mistral-v0_3-tiny-random": {
+      "flake": false,
+      "locked": {
+        "lastModified": 1721488222,
+        "narHash": "sha256-+LQgdRJAbA4jz7fyJ9Z7FGQ5yVueEXkWSQi+E9lQO1c=",
+        "ref": "refs/heads/main",
+        "rev": "7d912a02c3e39ec05b60171988f08335f52d2745",
+        "revCount": 8,
+        "type": "git",
+        "url": "https://huggingface.co/yujiepan/mistral-v0.3-tiny-random"
+      },
+      "original": {
+        "type": "git",
+        "url": "https://huggingface.co/yujiepan/mistral-v0.3-tiny-random"
+      }
+    },
+    "yujiepan--qwen2_5-tiny-random": {
+      "flake": false,
+      "locked": {
+        "lastModified": 1727064806,
+        "narHash": "sha256-GumEXYT9E4ysSKIXE34/Rk6rJL4OPX4z+ENBWwoiMJg=",
+        "ref": "refs/heads/main",
+        "rev": "0354728bb14944308c3134cf48d29302030a72c0",
+        "revCount": 3,
+        "type": "git",
+        "url": "https://huggingface.co/yujiepan/qwen2.5-tiny-random"
+      },
+      "original": {
+        "type": "git",
+        "url": "https://huggingface.co/yujiepan/qwen2.5-tiny-random"
+      }
+    },
+    "yujiepan--qwen3-tiny-random": {
+      "flake": false,
+      "locked": {
+        "lastModified": 1745905839,
+        "narHash": "sha256-X5IGZXGgxaEbpQXtcMp1te/CgjQsddCE7h+rj89bND8=",
+        "ref": "refs/heads/main",
+        "rev": "c5aa03d329380306bf4890b3715fecf0982efd52",
+        "revCount": 3,
+        "type": "git",
+        "url": "https://huggingface.co/yujiepan/qwen3-tiny-random"
+      },
+      "original": {
+        "type": "git",
+        "url": "https://huggingface.co/yujiepan/qwen3-tiny-random"
       }
     },
     "yuvio": {

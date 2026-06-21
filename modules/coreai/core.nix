@@ -1,35 +1,43 @@
 { inputs, ... }:
 {
   perSystem =
-    { final, ... }:
+    { final, lib, ... }:
     with final.coreai.python.pkgs;
     let
       _yuvio_ = inputs.flake.lib.metadataForFlakeInput inputs.self inputs.yuvio;
 
-      format = "wheel";
-
-      yuvio = buildPythonPackage (finalAttrs: {
+      yuvio = buildPythonPackage (_finalAttrs: {
         inherit (_yuvio_) pname version;
-        inherit format;
+        pyproject = true;
 
-        src = fetchPypi {
-          pname = builtins.replaceStrings [ "-" ] [ "_" ] finalAttrs.pname;
-          inherit (finalAttrs) version;
-          inherit format;
-          hash = "sha256-7TFxiiTvP0UQ/QchJizNcVTZ4HUwKgAbxnGrZO23v1U=";
-          platform = "any";
-          python = "py${final.coreai.python.versionMajor}";
-          dist = "py${final.coreai.python.versionMajor}";
-        };
+        src = inputs.yuvio;
+
+        build-system = [
+          setuptools
+          wheel
+        ];
 
         dependencies = [
           numpy
           psutil
         ];
+
+        pythonImportsCheck = [
+          "yuvio"
+          "yuvio.core"
+          "yuvio.formats"
+        ];
+
+        meta = {
+          description = "Read and write uncompressed yuv/ycbcr image and video files";
+          homepage = "https://github.com/labradon/yuvio";
+          license = lib.licenses.mit;
+        };
       });
 
       coreai-core =
         let
+          format = "wheel";
           pname = "coreai-core";
           version = "1.0.0b1";
         in

@@ -4,29 +4,39 @@
     {
       config,
       final,
+      inputs',
+      lib,
       ...
     }:
     with final.coreai.python.pkgs;
     let
       _coreai-models_ = inputs.flake.lib.metadataForFlakeInput inputs.self inputs.coreai-models;
-      _coreai-models-unstable_ = inputs.flake.lib.metadataForFlakeInput inputs.self inputs.coreai-models-unstable;
 
-      coreai-models = buildPythonPackage (finalAttrs: {
+      coreai-models = buildPythonPackage (_finalAttrs: {
         inherit (_coreai-models_) pname version;
+        pyproject = true;
 
-        src = final.fetchFromGitHub {
-          owner = "apple";
-          repo = finalAttrs.pname;
-          inherit (_coreai-models-unstable_) rev;
-          sha256 = "sha256-q1fg6AkBny10dvK0Y6OWemcXDAcPwumjFQL6Rm2/Exg=";
-        };
+        src = inputs.coreai-models-unstable;
 
-        sourceRoot = "${finalAttrs.src.name}/python";
+        postUnpack = ''
+          sourceRoot=$sourceRoot/python
+        '';
+
+        postPatch = ''
+          substituteInPlace pyproject.toml \
+            --replace-fail 'hatchling==' 'hatchling>='
+        '';
+
+        build-system = [
+          hatchling
+          pip
+          pythonRelaxDepsHook
+        ];
 
         dependencies = [
           accelerate
           config.packages.coreai-core
-          config.packages.coreai-opt
+          config.packages.coreai-optimization
           config.packages.coreai-torch
           diffusers
           huggingface-hub
@@ -40,25 +50,67 @@
           transformers
         ];
 
-        nativeBuildInputs = [
-          hatchling
-          pip
-          pythonRelaxDepsHook
-        ];
-
-        postPatch = ''
-          substituteInPlace pyproject.toml \
-            --replace-fail 'hatchling==' 'hatchling>='
-        '';
-
-        pyproject = true;
-
         pythonImportsCheck = [
           "coreai_models"
         ];
 
         pythonRelaxDeps = true;
+
+        meta = {
+          description = "Core AI model export, evaluation, and building blocks for on-device ML";
+          homepage = "https://github.com/apple/coreai-models";
+          license = lib.licenses.bsd3;
+        };
       });
+
+      coreai-models-tests = buildPythonPackage {
+        pname = "${coreai-models.pname}-test";
+        inherit (coreai-models) src version;
+
+        pyproject = false;
+        dontBuild = true;
+
+        postUnpack = ''
+          sourceRoot=$sourceRoot/python
+          export CFFIXED_USER_HOME=$TMPDIR
+        '';
+
+        dependencies = [
+          coreai-models
+        ];
+
+        nativeCheckInputs = [
+          pytestCheckHook
+        ];
+
+        HF_HUB_CACHE = inputs'.models.packages.cache;
+        TRANSFORMERS_OFFLINE = 1;
+
+        pytestFlags = [
+        ];
+
+        enabledTestPaths = [
+          #"tests"
+          "tests/test_model_conversion/test_macos_models.py::TestQwen2EndtoEnd::test_coreai"
+        ];
+
+        disabledTests = [
+        ];
+
+        disabledTestPaths = [
+          #"tests/test_model_conversion/test_macos_models.py::TestQwen2EndtoEnd::test_coreai"
+          #"tests/test_model_conversion/test_macos_models.py::TestQwen3EndtoEnd::test_coreai"
+          "tests/test_model_conversion/test_macos_models.py::TestGemma3EndtoEnd"
+          "tests/test_model_conversion/test_macos_models.py::TestGptOssEndtoEnd"
+          "tests/test_model_conversion/test_macos_models.py::TestQwen3MoeEndtoEnd"
+          "tests/test_model_conversion/test_macos_models.py::TestMixtralEndtoEnd"
+        ];
+
+        installPhase = ''
+          mkdir -p $out
+          touch $out/passed
+        '';
+      };
     in
     {
       apps = {
@@ -78,6 +130,10 @@
           type = "app";
           program = "${coreai-models}/bin/coreai.model.registry";
         };
+      };
+
+      checks = {
+        inherit coreai-models-tests;
       };
 
       packages = { inherit coreai-models; };
