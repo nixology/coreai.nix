@@ -1,22 +1,26 @@
-{ inputs, ... }:
+{ ... }@local:
+let
+  inherit (local.inputs) flake self;
+
+  inherit (flake.lib) metadataForFlakeInput;
+
+  inherit (local.lib) licenses;
+in
 {
   perSystem =
     {
       config,
       final,
       inputs',
-      lib,
       ...
     }:
     with final.coreai.python.pkgs;
     let
-      _coreai-models_ = inputs.flake.lib.metadataForFlakeInput inputs.self inputs.coreai-models;
+      _coreai-models_ = metadataForFlakeInput self local.inputs.coreai-models;
 
       coreai-models = buildPythonPackage (_finalAttrs: {
-        inherit (_coreai-models_) pname version;
+        inherit (_coreai-models_) pname src version;
         pyproject = true;
-
-        src = inputs.coreai-models-unstable;
 
         postUnpack = ''
           sourceRoot=$sourceRoot/python
@@ -59,11 +63,11 @@
         meta = {
           description = "Core AI model export, evaluation, and building blocks for on-device ML";
           homepage = "https://github.com/apple/coreai-models";
-          license = lib.licenses.bsd3;
+          license = licenses.bsd3;
         };
       });
 
-      coreai-models-tests = buildPythonPackage {
+      coreai-models-tests = buildPythonPackage (_finalAttrs: {
         pname = "${coreai-models.pname}-test";
         inherit (coreai-models) src version;
 
@@ -71,8 +75,8 @@
         dontBuild = true;
 
         postUnpack = ''
-          sourceRoot=$sourceRoot/python
           export CFFIXED_USER_HOME=$TMPDIR
+          sourceRoot=$sourceRoot/python
         '';
 
         dependencies = [
@@ -110,7 +114,7 @@
           mkdir -p $out
           touch $out/passed
         '';
-      };
+      });
     in
     {
       apps = {

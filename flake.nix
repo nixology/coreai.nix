@@ -7,16 +7,13 @@
 
   inputs.flake.url = "github:nixology/flake.nix";
 
-  inputs.coreai-models.url = "github:apple/coreai-models/0.1.0";
+  inputs.coreai-models.url = "github:apple/coreai-models/0.2.0";
   inputs.coreai-models.flake = false;
 
-  inputs.coreai-models-unstable.url = "github:apple/coreai-models";
-  inputs.coreai-models-unstable.flake = false;
-
-  inputs.coreai-optimization.url = "github:apple/coreai-optimization/v0.2.0";
+  inputs.coreai-optimization.url = "github:apple/coreai-optimization/v0.2.1";
   inputs.coreai-optimization.flake = false;
 
-  inputs.coreai-torch.url = "github:apple/coreai-torch/v0.4.0";
+  inputs.coreai-torch.url = "github:apple/coreai-torch/v0.4.1";
   inputs.coreai-torch.flake = false;
 
   inputs.coremltools.url = "github:apple/coremltools/9.0";

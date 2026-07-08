@@ -3,6 +3,7 @@
     {
       config,
       final,
+      inputs',
       lib,
       ...
     }:
@@ -25,8 +26,11 @@
             fi
 
             source "${venvDir}/bin/activate"
+
+            export HF_HUB_CACHE="${inputs'.models.packages.cache}";
           '';
         packages = [
+          uv
           config.packages.coreai-optimization
           config.packages.coreai-torch
           (final.coreai.python.self.withPackages (
@@ -35,18 +39,23 @@
               jupyterlab
               notebook
               pip
+              pytest
               setuptools
+              transformers
             ]
           ))
         ];
       };
     in
     {
-      shellEnvs.default =
-        with config.shellEnvs;
-        lib.mkMerge [
-          default
-          nix
-        ];
+      shellEnvironments = {
+        default =
+          with config.shellEnvironments;
+          lib.mkMerge [
+            default
+            nix
+          ];
+        mark = default;
+      };
     };
 }

@@ -1,4 +1,9 @@
-{ inputs, ... }:
+{ ... }@local:
+let
+  inherit (local.inputs) flake self;
+
+  inherit (flake.lib) metadataForFlakeInput;
+in
 {
   perSystem =
     {
@@ -9,7 +14,7 @@
     }:
     with final.coreai.python.pkgs;
     let
-      _coreai-torch_ = inputs.flake.lib.metadataForFlakeInput inputs.self inputs.coreai-torch;
+      _coreai-torch_ = metadataForFlakeInput self local.inputs.coreai-torch;
 
       format = "wheel";
 
@@ -21,7 +26,7 @@
           pname = builtins.replaceStrings [ "-" ] [ "_" ] finalAttrs.pname;
           inherit (finalAttrs) version;
           inherit format;
-          hash = "sha256-sQnACQ2DsKjrcwL+ojFM88uNqVdHf3sxuOw2SAqUokc=";
+          hash = "sha256-4qrpgzlBO2LAMTI2PcOXk28rDZB0d2aFI5C6Ig0IX1Q=";
           platform = "any";
           python = "py${final.coreai.python.versionMajor}";
           dist = "py${final.coreai.python.versionMajor}";
@@ -57,10 +62,8 @@
       });
 
       coreai-torch = buildPythonPackage (_finalAttrs: {
-        inherit (_coreai-torch_) pname version;
+        inherit (_coreai-torch_) pname src version;
         pyproject = true;
-
-        src = inputs.coreai-torch;
 
         build-system = [
           setuptools
@@ -131,8 +134,7 @@
 
       coreai-torch-tests = buildPythonPackage {
         pname = "${coreai-torch.pname}-test";
-        inherit (coreai-torch) version;
-        src = inputs.coreai-torch;
+        inherit (_coreai-torch_) src version;
 
         pyproject = false;
         dontBuild = true;
@@ -172,8 +174,7 @@
 
       coreai-torch-notebook-tests = buildPythonPackage {
         pname = "${coreai-torch.pname}-test-docs";
-        inherit (coreai-torch) version;
-        src = inputs.coreai-torch;
+        inherit (_coreai-torch_) src version;
 
         pyproject = false;
         dontBuild = true;
@@ -212,10 +213,6 @@
     {
       checks = {
         inherit coreai-torch-tests coreai-torch-notebook-tests;
-      };
-
-      overlayAttrs = {
-        inherit (inputs'.mlx.packages) mlx mlx-lm;
       };
 
       packages = {

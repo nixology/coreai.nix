@@ -50,11 +50,11 @@
     },
     "channel": {
       "locked": {
-        "lastModified": 1782175435,
-        "narHash": "sha256-EMzXKmnOtBQ2MnvpiNOm7E+kOMvdPrIKaeg52Tip2Uk=",
+        "lastModified": 1783475452,
+        "narHash": "sha256-3S92fSuv32mjJz2Qb2F4405c21J55F4NIphz5K6hxco=",
         "owner": "nixos",
         "repo": "nixpkgs",
-        "rev": "89570f24e97e614aa34aa9ab1c927b6578a43775",
+        "rev": "05988b07fb05cbcb50be6bce197b4b5f75b5e61b",
         "type": "github"
       },
       "original": {
@@ -76,11 +76,11 @@
         ]
       },
       "locked": {
-        "lastModified": 1783083471,
-        "narHash": "sha256-CMA3B7XIN8qrYkCir6YRPc8h21U9dxtevwKQNpHymxk=",
+        "lastModified": 1784509818,
+        "narHash": "sha256-T3RN8pOJ7N4jIiPMiXUyztKZwB68V/sCZHmzSDKw1/I=",
         "owner": "nixology",
         "repo": "core.nix",
-        "rev": "99148c521db155d9dc88939aabb739d319f08ed1",
+        "rev": "10fc274d11b9971005d03c872c967de0a98ca85a",
         "type": "github"
       },
       "original": {
@@ -92,32 +92,16 @@
     "coreai-models": {
       "flake": false,
       "locked": {
-        "lastModified": 1780947666,
-        "narHash": "sha256-CAk31pivLnWWNOYg7ym5CghCcpzxjCDJgwW+ApipcCY=",
+        "lastModified": 1783547205,
+        "narHash": "sha256-HbXi2TspTN+WLLjKn3rA99PKhthQHQlqgdn5VtOH530=",
         "owner": "apple",
         "repo": "coreai-models",
-        "rev": "b1cb71b8522d99408059fa0b98b8742171bcb0b8",
+        "rev": "938d0b8943b942ce66438b94ab017c5631d1aef4",
         "type": "github"
       },
       "original": {
         "owner": "apple",
-        "ref": "0.1.0",
-        "repo": "coreai-models",
-        "type": "github"
-      }
-    },
-    "coreai-models-unstable": {
-      "flake": false,
-      "locked": {
-        "lastModified": 1783030962,
-        "narHash": "sha256-5eTr1MI8QTzT44p9YxWtcBTOaAGAwtD90LlMvwEwxK4=",
-        "owner": "apple",
-        "repo": "coreai-models",
-        "rev": "e203a0da1f847041d7d28036fcc9b484495359bb",
-        "type": "github"
-      },
-      "original": {
-        "owner": "apple",
+        "ref": "0.2.0",
         "repo": "coreai-models",
         "type": "github"
       }
@@ -125,16 +109,16 @@
     "coreai-optimization": {
       "flake": false,
       "locked": {
-        "lastModified": 1780707807,
-        "narHash": "sha256-4djTmZTagEFAQGRDm+rO/UcqOcVceS0bF2vdOb+W3Yg=",
+        "lastModified": 1783021878,
+        "narHash": "sha256-TMPpGFnXFR5+VWZZbIEDhwZDuZXJQt/04NUyJMKDJMM=",
         "owner": "apple",
         "repo": "coreai-optimization",
-        "rev": "e27b3d050196c418adf85f19a9827d2dd1801e73",
+        "rev": "e0203efb164c26c1f8ea3103b4d55021d089188b",
         "type": "github"
       },
       "original": {
         "owner": "apple",
-        "ref": "v0.2.0",
+        "ref": "v0.2.1",
         "repo": "coreai-optimization",
         "type": "github"
       }
@@ -142,16 +126,16 @@
     "coreai-torch": {
       "flake": false,
       "locked": {
-        "lastModified": 1780712416,
-        "narHash": "sha256-VxR6WE73B4azfndCWUZn4g049MklKXUu+awO/IT8brw=",
+        "lastModified": 1782943945,
+        "narHash": "sha256-0gw+wGwhySgIP92FqrYdUe4jFubcwgfosRkuCYorQ90=",
         "owner": "apple",
         "repo": "coreai-torch",
-        "rev": "7171b3bb59f2474a5313d82ff4bfe187a1155f94",
+        "rev": "71ca4a83067023ed6c93be539c3e3e516884a631",
         "type": "github"
       },
       "original": {
         "owner": "apple",
-        "ref": "v0.4.0",
+        "ref": "v0.4.1",
         "repo": "coreai-torch",
         "type": "github"
       }
@@ -179,11 +163,11 @@
       },
       "locked": {
         "dir": "nixpkgs-unstable",
-        "lastModified": 1782487550,
-        "narHash": "sha256-3FNlJjDJ8D8W+q+uS6REnSWf0EnbE7wFq3JUVhP7CXw=",
+        "lastModified": 1783697204,
+        "narHash": "sha256-wfnn547w/XeufZBUQjW3P9zvn0sFKIpGyIjECrswZd8=",
         "owner": "nixology",
         "repo": "channels.nix",
-        "rev": "8af490517a58ad6d0954470ed1c16c0b639f975d",
+        "rev": "ee1d59e9ef0785ebd75df1f28cd78d66b01ef0eb",
         "type": "github"
       },
       "original": {
@@ -198,11 +182,11 @@
         "core": "core"
       },
       "locked": {
-        "lastModified": 1783083661,
-        "narHash": "sha256-HJoD7AbOJuJcnQl/UUrni7Mivr0Gzxd2HOTxIKhB0NQ=",
+        "lastModified": 1784566660,
+        "narHash": "sha256-XYqMDIAugtGF0UL2BmXmvRzNOEsIGD1bBq9OJr7f+kY=",
         "owner": "nixology",
         "repo": "flake.nix",
-        "rev": "553c7ca991e1485794d3f737ea839a6dc50d1a56",
+        "rev": "fa684da826e916bf0e15a0bfcec29e6965577a84",
         "type": "github"
       },
       "original": {
@@ -254,14 +238,15 @@
         "mlx-lm": "mlx-lm",
         "models": [
           "models"
-        ]
+        ],
+        "transformers-to-mlx": "transformers-to-mlx"
       },
       "locked": {
-        "lastModified": 1783083949,
-        "narHash": "sha256-fKTNuMOkwHQQkBjnLKHl3eKNP1uH7nSJ/dva6GwNUaE=",
+        "lastModified": 1783430134,
+        "narHash": "sha256-9sWgPWY4t71mfRLUIf6l3d4GKTRZ1+xQwCLI4kZZq4I=",
         "owner": "nixology",
         "repo": "mlx.nix",
-        "rev": "8ef37dd92bbfbc10f352f8b7c28bb56bc13b4298",
+        "rev": "d217687effa860454c190956bac6a62e7af76b00",
         "type": "github"
       },
       "original": {
@@ -356,11 +341,11 @@
         "yujiepan--qwen3-tiny-random": "yujiepan--qwen3-tiny-random"
       },
       "locked": {
-        "lastModified": 1783083841,
-        "narHash": "sha256-vGf0hjhVhOjFJI1WMcDxLSnE1cNDe481DsNezv/vk6E=",
+        "lastModified": 1784663232,
+        "narHash": "sha256-PHk1xqesY2wg41U1oatdR9uCPINitwTs0noUyM/6ME0=",
         "owner": "nixology",
         "repo": "models.nix",
-        "rev": "d2a64f5739450274a569e956f9158e92e6a01db8",
+        "rev": "2acf4b5a4d40b3f6e958bb7fcf07a8c82f457678",
         "type": "github"
       },
       "original": {
@@ -411,7 +396,6 @@
     "root": {
       "inputs": {
         "coreai-models": "coreai-models",
-        "coreai-models-unstable": "coreai-models-unstable",
         "coreai-optimization": "coreai-optimization",
         "coreai-torch": "coreai-torch",
         "coremltools": "coremltools",
@@ -419,6 +403,22 @@
         "mlx": "mlx",
         "models": "models",
         "yuvio": "yuvio"
+      }
+    },
+    "transformers-to-mlx": {
+      "flake": false,
+      "locked": {
+        "lastModified": 1776351115,
+        "narHash": "sha256-e3fAO5dej4qIzewVRB18FEhih1Zstl7yxgo2HfnVp3k=",
+        "owner": "huggingface",
+        "repo": "transformers-to-mlx",
+        "rev": "1800e733dc99edf6b33c4c631c813e880dc9cb8f",
+        "type": "github"
+      },
+      "original": {
+        "owner": "huggingface",
+        "repo": "transformers-to-mlx",
+        "type": "github"
       }
     },
     "unsloth--Qwen3_6-27B-MLX-8bit": {
@@ -446,11 +446,11 @@
         "rev": "d928611c119d7d86037d6926ac50712062ff0f29",
         "revCount": 3,
         "type": "git",
-        "url": "https://huggingface.co/unsloth/Qwen3.6-35B-A3b-MLX-8bit"
+        "url": "https://huggingface.co/unsloth/Qwen3.6-35B-A3B-MLX-8bit"
       },
       "original": {
         "type": "git",
-        "url": "https://huggingface.co/unsloth/Qwen3.6-35B-A3b-MLX-8bit"
+        "url": "https://huggingface.co/unsloth/Qwen3.6-35B-A3B-MLX-8bit"
       }
     },
     "yujiepan--gemma-3-tiny-random": {

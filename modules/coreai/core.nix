@@ -1,16 +1,19 @@
-{ inputs, ... }:
+{ ... }@local:
+let
+  inherit (local.inputs) flake self;
+
+  inherit (flake.lib) metadataForFlakeInput;
+in
 {
   perSystem =
     { final, lib, ... }:
     with final.coreai.python.pkgs;
     let
-      _yuvio_ = inputs.flake.lib.metadataForFlakeInput inputs.self inputs.yuvio;
+      _yuvio_ = metadataForFlakeInput self local.inputs.yuvio;
 
       yuvio = buildPythonPackage (_finalAttrs: {
-        inherit (_yuvio_) pname version;
+        inherit (_yuvio_) pname src version;
         pyproject = true;
-
-        src = inputs.yuvio;
 
         build-system = [
           setuptools
@@ -39,7 +42,14 @@
         let
           format = "wheel";
           pname = "coreai-core";
-          version = "1.0.0b1";
+          version = "1.0.0b2";
+
+          pythonVersion = final.coreai.python.versionMajorMinorCompact;
+
+          hashes = {
+            "312" = "sha256-q+qSBCbBQv+7bZFrRjx33Ii2FDkHDU1kT6wa3Fuvu/0=";
+            "313" = "sha256-a5qS09buBEfNUmXXtS2r21chWqhwH3qUHvg94uzUdOo=";
+          };
         in
         buildPythonPackage (finalAttrs: {
           inherit pname version;
@@ -49,12 +59,17 @@
             pname = builtins.replaceStrings [ "-" ] [ "_" ] finalAttrs.pname;
             inherit (finalAttrs) version;
             inherit format;
-            hash = "sha256-ZJvZjMwgJP4bFz8hMC3VM+D+97Uxiadl/DWFjHArc0g=";
+
+            hash =
+              hashes.${pythonVersion} or (throw "coreai-core: unsupported Python version cp${pythonVersion}");
+
             platform = "macosx_26_0_arm64";
-            python = "cp${final.coreai.python.versionMajorMinorCompact}";
-            dist = "cp${final.coreai.python.versionMajorMinorCompact}";
-            abi = "cp${final.coreai.python.versionMajorMinorCompact}";
+            python = "cp${pythonVersion}";
+            dist = "cp${pythonVersion}";
+            abi = "cp${pythonVersion}";
           };
+
+          dontStrip = true;
 
           dependencies = [
             ml-dtypes
