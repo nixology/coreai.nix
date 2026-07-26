@@ -55,7 +55,7 @@
             default
             nix
           ];
-        mark = default;
+        uv = default;
       };
     };
 }

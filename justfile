@@ -9,3 +9,6 @@ test-models:
 
 test-torch:
   nix build .#checks.{{system}}.coreai-torch-tests --option sandbox false -L
+
+test:
+  HF_HUB_CACHE=~/.cache/huggingface/hub uv run pytest python/tests -v

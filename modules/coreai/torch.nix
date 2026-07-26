@@ -105,7 +105,7 @@ in
           ];
           docs = [
             sphinx
-            #            shibuya
+            #shibuya
             myst-nb
             nbmake
             ghp-import
@@ -133,7 +133,7 @@ in
       });
 
       coreai-torch-tests = buildPythonPackage {
-        pname = "${coreai-torch.pname}-test";
+        pname = "${coreai-torch.pname}-tests";
         inherit (_coreai-torch_) src version;
 
         pyproject = false;
@@ -170,10 +170,12 @@ in
           mkdir -p $out
           touch $out/passed
         '';
+
+        __noChroot = true;
       };
 
       coreai-torch-notebook-tests = buildPythonPackage {
-        pname = "${coreai-torch.pname}-test-docs";
+        pname = "${coreai-torch.pname}-notebook-tests";
         inherit (_coreai-torch_) src version;
 
         pyproject = false;
@@ -208,6 +210,8 @@ in
           mkdir -p $out
           touch $out/passed
         '';
+
+        __noChroot = true;
       };
     in
     {
@@ -216,7 +220,12 @@ in
       };
 
       packages = {
-        inherit coreai-torch coreai-torch-wheel;
+        inherit
+          coreai-torch
+          coreai-torch-wheel
+          coreai-torch-tests
+          coreai-torch-notebook-tests
+          ;
       };
     };
 }

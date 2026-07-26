@@ -39,7 +39,6 @@ in
 
         dependencies = [
           accelerate
-          config.packages.coreai-core
           config.packages.coreai-optimization
           config.packages.coreai-torch
           diffusers
@@ -68,7 +67,7 @@ in
       });
 
       coreai-models-tests = buildPythonPackage (_finalAttrs: {
-        pname = "${coreai-models.pname}-test";
+        pname = "${coreai-models.pname}-tests";
         inherit (coreai-models) src version;
 
         pyproject = false;
@@ -137,9 +136,11 @@ in
       };
 
       checks = {
-        inherit coreai-models-tests;
+        #inherit coreai-models-tests;
       };
 
-      packages = { inherit coreai-models; };
+      packages = {
+        inherit coreai-models coreai-models-tests;
+      };
     };
 }
