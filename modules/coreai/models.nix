@@ -39,8 +39,10 @@ in
 
         dependencies = [
           accelerate
-          config.packages.coreai-optimization
+          config.packages.coreai-core
           config.packages.coreai-torch
+          config.packages.coreai-optimization
+          torch
           diffusers
           huggingface-hub
           numpy
@@ -48,7 +50,6 @@ in
           safetensors
           sentencepiece
           tokenizers
-          torch
           tqdm
           transformers
         ];

@@ -1,0 +1,24 @@
+diff --git a/torchao/experimental/CMakeLists.txt b/torchao/experimental/CMakeLists.txt
+index 1d3c28508..f9f9082ac 100644
+--- a/torchao/experimental/CMakeLists.txt
++++ b/torchao/experimental/CMakeLists.txt
+@@ -93,18 +93,8 @@ endif()
+ 
+ 
+ if (NOT TARGET cpuinfo)
+-    # For some reason cpuinfo package has unused functions/variables
+-    # TODO (T215533422): fix upstream
+-    set(CPUINFO_BUILD_UNIT_TESTS OFF CACHE BOOL "Disable unit tests" FORCE)
+-    set(CPUINFO_BUILD_MOCK_TESTS OFF CACHE BOOL "Disable mock tests" FORCE)
+-    set(CPUINFO_BUILD_BENCHMARKS OFF CACHE BOOL "Disable benchmarks" FORCE)
+     add_compile_options(-Wno-unused-function -Wno-unused-variable)
+-    include(FetchContent)
+-    FetchContent_Declare(cpuinfo
+-        GIT_REPOSITORY https://github.com/pytorch/cpuinfo.git
+-        GIT_TAG c61fe919607bbc534d7a5a5707bdd7041e72c5ff)
+-    FetchContent_MakeAvailable(
+-        cpuinfo)
++    find_package(cpuinfo REQUIRED)
+ endif()
+ 
+ # Build ATen ops

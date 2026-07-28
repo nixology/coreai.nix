@@ -1,16 +1,26 @@
 {
   perSystem =
     {
+      config,
       final,
       lib,
       pkgs,
       ...
     }:
+    let
+      packageOverrides =
+        pyFinal: _pyPrev: with pyFinal; {
+          torch = torch_2_9_1;
+          torchao = torchao_0_15_0;
+          torchaudio = torchaudio_2_8_0;
+          torchcodec = torchcodec_0_7_0;
+          torchvision = torchvision_0_23_0;
+        };
+    in
     {
       overlayAttrs = {
-        pythonPackagesExtensions = pkgs.pythonPackagesExtensions ++ [
-          #packageOverrides
-        ];
+        pythonPackagesExtensions =
+          pkgs.pythonPackagesExtensions ++ config.pythonPackagesExtensions ++ [ packageOverrides ];
 
         coreai =
           let

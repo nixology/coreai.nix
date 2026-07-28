@@ -15,19 +15,6 @@
           (final.darwinMinVersionHook "15.0")
         ];
 
-        dependencies = [
-          numpy # == 2.1.0
-          protobuf
-          six
-          sympy
-          tqdm
-          packaging
-          attrs
-          cattrs
-          pyaml
-        ]
-        ++ finalAttrs.passthru.optional-dependencies.torch;
-
         nativeBuildInputs = [
           cmake
           ninja
@@ -35,39 +22,129 @@
           wheel
         ];
 
+        dependencies = [
+          numpy # >= 1.14.5
+          protobuf # >= 3.1.0
+          sympy
+          tqdm
+          packaging
+          attrs # >= 21.3.0
+          cattrs
+          pyaml
+        ];
+
         optional-dependencies = {
-          sklearn = [
-            scikit-learn # <= 1.5.1
+          build = [
+            numpy # == 2.1.0
+            protobuf
+            pytest
+            setuptools
+            six
+            sympy
+            tqdm
+            wheel
+            attrs
+            cattrs
+            pyaml
           ];
 
-          lightgbm = [
-            lightgbm # == 4.6.0
+          common_test_packages = [
+            boto3 # == 1.39.3
+
+            configparser
+
+            olefile # == 0.44
+            pandas
+            parameterized # == 0.8.1
+            pillow
+            pytest # == 7.1.2
+            pytest-cov
+            #pytest-sugar
+            pytest-timeout
+            pytest-asyncio
+            pytest-xdist
+
+            scikit-learn # == 1.5.1
+
+            six
+            sympy # > 1.6
+            gast # == 0.4.0
+
+            mock
+            wrapt
+            tqdm
+
+            transformers # == 4.38.2
+            peft # == 0.13.2
           ];
 
-          torch = [
+          docs = [
+            Babel
+            MarkupSafe
+            Pygments
+            Sphinx # == 7.4.7
+            alabaster
+            certifi
+            chardet
+            docutils
+            idna
+            imagesize
+            myst-parser
+            numpy
+            numpydoc
+
+            protobuf # ==3.19.6
+
+            pytz
+            six
+            snowballstemmer
+            sphinx-rtd-theme
+            sphinx-book-theme
+            sphinxcontrib-websupport
+            sphinx-gallery
+            sphinx-code-tabs
+            sphinx-copybutton
+            sympy
+            typing
+            urllib3
+            torch # >= 1.13.0
+            scikit-learn
+            pillow
+          ];
+
+          pytorch = [
             torch # == 2.8.0
-            torchaudio
-            torchvision
-            torchao # == 0.12.0
+            torchaudio # >= 2.2.0
+            torchvision # >= 0.17.0
+            #            torchsr # == 1.0.4
+
             timm # == 0.6.13
+
+            torchao # == 0.12.0
           ];
 
-          transformers = [
-            transformers
-          ];
+          test =
+            finalAttrs.passthru.optional-dependencies.common_test_packages
+            ++ finalAttrs.passthru.optional-dependencies.pytorch
+            ++ [
+              numpy # >= 2.0.0
 
-          scipy = [
-            scipy
-          ];
+              scipy
 
-          # Convenience aggregate.
-          all = lib.concatLists [
-            finalAttrs.passthru.optional-dependencies.sklearn
-            finalAttrs.passthru.optional-dependencies.lightgbm
-            finalAttrs.passthru.optional-dependencies.torch
-            finalAttrs.passthru.optional-dependencies.transformers
-            finalAttrs.passthru.optional-dependencies.scipy
-          ];
+              lightgbm # == 4.6.0
+
+              filelock # == 3.6.0
+              pytest-flake8 # == 1.0.7
+              pytest-xdist # == 3.6.1
+              pytest-mock # == 3.8.2
+            ];
+
+          test_torch =
+            finalAttrs.passthru.optional-dependencies.common_test_packages
+            ++ finalAttrs.passthru.optional-dependencies.pytorch
+            ++ [
+              numpy # >= 2.0.0
+            ];
         };
 
         cmakeFlags = [
@@ -102,10 +179,11 @@
         exec /usr/bin/sw_vers "$@"
       '';
 
-      coremltools-tests = buildPythonPackage {
+      coremltools-tests = buildPythonPackage (_finalAttrs: {
         pname = "${coremltools.pname}-tests";
         src = coremltools;
         inherit (coremltools) version;
+        sourceRoot = "${python.libPrefix}-${coremltools.pname}-${coremltools.version}/${python.sitePackages}/coremltools/test";
 
         pyproject = false;
         dontBuild = true;
@@ -114,41 +192,11 @@
         nativeCheckInputs = [
           pytestCheckHook
           swVers
-        ];
+        ]
+        ++ coremltools.optional-dependencies.test;
 
         dependencies = [
           coremltools
-
-          boto3 # == 1.39.3
-
-          configparser
-
-          olefile # == 0.44
-          pandas
-          parameterized # == 0.8.1
-          pillow
-
-          filelock # == 3.6.0
-
-          pytest-cov
-          pytest-timeout
-          pytest-asyncio
-          pytest-xdist # == 3.6.1
-          pytest-flake8 # == 1.0.7
-          pytest-mock # == 3.8.2
-
-          scikit-learn # == 1.5.1
-
-          six
-          sympy
-          gast # == 0.4.0
-
-          mock
-          wrapt
-          tqdm
-
-          transformers # == 4.38.2
-          peft # == 0.13.2
         ];
 
         preCheck = ''
@@ -156,47 +204,47 @@
           export TMPDIR="$TMPDIR/tmp"
         '';
 
-        enabledTestPaths = [
-          "${python.sitePackages}/coremltools/test"
-        ];
-
         disabledTestPaths = [
           # api
-          "${python.sitePackages}/coremltools/test/api/test_api_examples.py::TestMLComputePlan::test_mlprogram_compute_plan"
-          "${python.sitePackages}/coremltools/test/api/test_api_examples.py::TestMLProgramConverterExamples::test_build_stateful_model"
-          "${python.sitePackages}/coremltools/test/api/test_api_examples.py::TestMLProgramConverterExamples::test_stateful_model_read_write_state"
+          "api/test_api_examples.py::TestMLComputePlan::test_mlprogram_compute_plan"
+          "api/test_api_examples.py::TestMLProgramConverterExamples::test_build_stateful_model"
+          "api/test_api_examples.py::TestMLProgramConverterExamples::test_stateful_model_read_write_state"
 
           # blob
-          "${python.sitePackages}/coremltools/test/blob/test_weights.py::TestWeightIDSharing::test_multi_functions"
+          "blob/test_weights.py::TestWeightIDSharing::test_multi_functions"
 
           # ml_program
-          "${python.sitePackages}/coremltools/test/ml_program/experimental/test_compute_plan_utils.py::TestComputePlanUtils::test_remote_proxy"
-          "${python.sitePackages}/coremltools/test/ml_program/experimental/test_perf_utils.py::TestMLModelBenchmarker"
-          "${python.sitePackages}/coremltools/test/ml_program/experimental/test_perf_utils.py::TestTorchMLModelBenchmarker"
-          "${python.sitePackages}/coremltools/test/ml_program/experimental/test_torch_debugging_utils.py::TestTorchModelComparator"
-          "${python.sitePackages}/coremltools/test/ml_program/test_utils.py::TestMultiFunctionDescriptor"
-          "${python.sitePackages}/coremltools/test/ml_program/test_utils.py::TestMultiFunctionModelEnd2End"
-          "${python.sitePackages}/coremltools/test/ml_program/test_utils.py::TestMaterializeSymbolicShapeMLModel"
+          "ml_program/experimental/test_compute_plan_utils.py::TestComputePlanUtils::test_remote_proxy"
+          "ml_program/experimental/test_perf_utils.py::TestMLModelBenchmarker"
+          "ml_program/experimental/test_perf_utils.py::TestTorchMLModelBenchmarker"
+          "ml_program/experimental/test_torch_debugging_utils.py::TestTorchModelComparator"
+          "ml_program/test_utils.py::TestMultiFunctionDescriptor"
+          "ml_program/test_utils.py::TestMultiFunctionModelEnd2End"
+          "ml_program/test_utils.py::TestMaterializeSymbolicShapeMLModel"
 
           # modelpackage
-          "${python.sitePackages}/coremltools/test/modelpackage/test_modelpackage.py::TestCompiledMLModel::test_state"
+          "modelpackage/test_modelpackage.py::TestCompiledMLModel::test_state"
 
           # neural_network
-          "${python.sitePackages}/coremltools/test/neural_network/test_numpy_nn_layers.py::CoreML3NetworkStressTest::test_power_iteration_cpu"
+          "neural_network/test_numpy_nn_layers.py::CoreML3NetworkStressTest::test_power_iteration_cpu"
 
           # optimize
-          "${python.sitePackages}/coremltools/test/optimize/torch/quantization/test_coreml_quantizer.py"
-          "${python.sitePackages}/coremltools/test/optimize/coreml/test_post_training_quantization.py::TestPyTorchConverterExamples::test_stateful_accumulator"
+          "optimize/torch/quantization/test_coreml_quantizer.py"
+          "optimize/coreml/test_post_training_quantization.py::TestPyTorchConverterExamples::test_stateful_accumulator"
+          "optimize/torch/conversion/joint/test_joint_compression_conversion.py::test_sparsegpt[joint_pruning_palettization]"
+          "optimize/torch/conversion/quantization/test_quantization_conversion.py::test_gptq[4bit]"
+          "optimize/torch/quantization/test_configure.py::test_conv_act_fusion[False-GLU-config4]"
+          "optimize/torch/quantization/test_configure.py::test_conv_act_fusion[False-SELU-config15]"
 
           # not architecturally compatible with darwin-arm64
-          "${python.sitePackages}/coremltools/test/xgboost_tests"
+          "xgboost_tests"
         ];
 
         installPhase = ''
           mkdir -p $out
           touch $out/passed
         '';
-      };
+      });
     in
     {
       packages = {
